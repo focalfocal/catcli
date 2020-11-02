@@ -3,6 +3,5 @@
 dist/
 build/
 *.egg-info/
-#tests, etc:
 tmp/ 
-*.catalog
+catcli.catalog
