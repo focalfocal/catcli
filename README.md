@@ -1,18 +1,15 @@
-# CATCLI
+# CATCLI + rar support
 
-[![Build Status](https://travis-ci.org/deadc0de6/catcli.svg?branch=master)](https://travis-ci.org/deadc0de6/catcli)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-[![Coverage Status](https://coveralls.io/repos/github/deadc0de6/catcli/badge.svg?branch=master)](https://coveralls.io/github/deadc0de6/catcli?branch=master)
-[![PyPI version](https://badge.fury.io/py/catcli.svg)](https://badge.fury.io/py/catcli)
-[![AUR](https://img.shields.io/aur/version/catcli-git.svg)](https://aur.archlinux.org/packages/catcli-git)
 [![Python](https://img.shields.io/pypi/pyversions/catcli.svg)](https://pypi.python.org/pypi/catcli)
+
 
 *The command line catalog tool for your offline data*
 
 Did you ever wanted to find back that specific file that should be on one of your
 backup DVDs or one of your external hard drives? You usually go through all
 of them hoping to find the right one on the first try?
-[Catcli](https://github.com/deadc0de6/catcli) indexes external media
+[Catcli + rar support](https://github.com/focalfocal/catcli) indexes external media
 in a catalog file and allows to quickly find specific files or even navigate in the
 catalog of indexed files while these are not connected to your host.
 
@@ -21,7 +18,7 @@ Features:
   * Index any directories in a catalog
   * Ability to search for files by name in the catalog
   * Ability to navigate through indexed data à la `ls`
-  * Handle archive files (zip, tar, ...) and index their content
+  * Handle archive files (zip, rar, tar, ...) and index their content
   * Save catalog to json for easy versioning with git
   * Command line interface FTW
   * Store files and directories sizes
@@ -30,6 +27,7 @@ Features:
   * Tag your different storages with additional information
 
 <a href="https://asciinema.org/a/hRE22qbVtBGxOM1yxw2y4fBy8"><img src="https://asciinema.org/a/hRE22qbVtBGxOM1yxw2y4fBy8.png" width="50%" height="50%"></a>
+
 
 Quick start:
 
@@ -50,7 +48,7 @@ see [usage](#usage) for specific info
 
 ## Why catcli?
 
-[Catcli](https://github.com/deadc0de6/catcli) gives the ability to navigate,
+[Catcli](https://github.com/focalfocal/catcli) gives the ability to navigate,
 explore and find your files that are stored on external media
 (DVDs, hard drives, USB sticks, etc) when those are not connected.
 Catcli can just as easily index any arbitrary directories.
@@ -83,30 +81,52 @@ To install run:
 $ pip3 install catcli --user
 ```
 
-Or from github directly
+To install from github
 ```bash
-$ cd /tmp; git clone https://github.com/deadc0de6/catcli && cd catcli
+$ cd /tmp; git clone https://github.com/focalfocal/catcli && cd catcli
 $ sudo python3 setup.py install
 $ catcli --help
 ```
 
 To work with catcli without installing it, you can do the following
 ```bash
-$ cd /tmp; git clone https://github.com/deadc0de6/catcli && cd catcli
+$ cd /tmp; git clone https://github.com/focalfocal/catcli && cd catcli
 $ pip3 install -r requirements.txt --user
 $ python3 -m catcli.catcli --help
 ```
 
 or install it in a virtualenv
 ```bash
-$ cd /tmp; git clone https://github.com/deadc0de6/catcli && cd catcli
+$ cd /tmp; git clone https://github.com/focalfocal/catcli && cd catcli
 $ virtualenv -p python3 env
 $ source env/bin/activate
 $ python setup.py install
 $ catcli --help
 ```
 
-Catcli is also available on aur: https://aur.archlinux.org/packages/catcli-git/
+Note: the original version of catcli by deadc0de6 (no rar support) is also available on Pypi and aur.
+
+## RAR library installation
+
+A Python rar wrapper is automatically installed when catcli is installed, from PyPI. <a href="https://github.com/matiasb/python-unrar">python-unrar</a> is included on requirements.txt.  The wrapper was developed by matiasb under GPL-3.0 license. 
+
+However, python-unrar requires UnRAR library, which is propietary by RarLabs, so not included here. You should download UnRAR library sources from:
+
+http://www.rarlab.com/rar_add.htm
+
+and compile (you may need to rename the makefile that you want to use according to your OS) and install it from there:
+
+$ make lib
+
+$ make install-lib
+
+(latest tested sources: http://www.rarlab.com/rar/unrarsrc-5.2.6.tar.gz)
+
+For Windows you can also download the already compiled library (http://www.rarlab.com/rar/UnRARDLL.exe).
+
+If you prefer not to install the library, you should make it "findable" by adding the library file to a directory where libraries are searched (or change required environment variable).
+
+As an alternative, you can also set UNRAR_LIB_PATH variable in your environment to the library path and python-unrar will try to load the UnRAR library from there.
 
 # Usage
 
@@ -148,7 +168,7 @@ Using the `-a --archive` switch allows to also index archive files as explained
 ## Index archive files
 
 Catcli is able to index and explore the content of archive files.
-Following archive formats are supported: *tar*, *tar.gz*, *tar.xz*, *lzma*, *tar.bz2*, *zip*.
+Following archive formats are supported: *tar*, *tar.gz*, *tar.xz*, *lzma*, *tar.bz2*, *zip*, *rar*.
 Catcli is also able to find files within indexed archive files.
 
 See the [archive example](#archive-example) for more.
@@ -370,9 +390,8 @@ All commands handle archive files (like `tree` or `find`).
 
 # Contribution
 
-If you are having trouble installing or using catcli, open an issue.
-
-If you want to contribute, feel free to do a PR (please follow PEP8).
+If you want to contribute to the catcli code, please refer to the original catcli developer:
+https://github.com/deadc0de6/catcli
 
 The `tests.sh` script can be run to check the code.
 

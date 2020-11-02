@@ -3,12 +3,15 @@ author: deadc0de6 (https://github.com/deadc0de6)
 Copyright (c) 2017, deadc0de6
 
 Catcli generic compressed data lister
+----------------------------------------------------------------------------------------
+author for modifications to add rar support: focalfocal (https://github.com/focalfocal)
+Copyright (c) 2020, focalfocal for the modifications
 """
 
 import os
 import tarfile
 import zipfile
-
+from unrar import rarfile
 
 class Decomp:
 
@@ -25,7 +28,8 @@ class Decomp:
             'tlz': self._tar,
             'bz2': self._tar,
             'tar.bz2': self._tar,
-            'zip': self._zip}
+            'zip': self._zip,
+            'rar': self._rar}
 
     def get_format(self):
         '''return list of supported extensions'''
@@ -51,3 +55,10 @@ class Decomp:
             return None
         z = zipfile.ZipFile(path)
         return z.namelist()
+
+    def _rar(self, path):
+        '''return list of file names in rar'''
+        if not rarfile.is_rarfile(path):
+            return None
+        r = rarfile.RarFile(path)
+        return r.namelist()

@@ -20,13 +20,13 @@ setup(
     name='catcli',
     version=VERSION,
 
-    description='The command line catalog tool for your offline data',
+    description='The command line catalog tool for your offline data (added rar support)',
     long_description=read_readme(readme),
-    url='https://github.com/deadc0de6/catcli',
-    download_url = 'https://github.com/deadc0de6/catcli/archive/v'+VERSION+'.tar.gz',
+    url='https://github.com/focalfocal/catcli',
+    download_url = 'https://github.com/focalfocal/catcli/archive/v'+VERSION+'.tar.gz',
 
-    author='deadc0de6',
-    author_email='deadc0de6@foo.bar',
+    author='deadc0de6 for the catcli, matiasb for python-unrar, and focalfocal for the integration',
+    author_email='for main author: deadc0de6@foo.bar',
 
     license='GPLv3',
     python_requires=REQUIRES_PYTHON,
@@ -41,7 +41,7 @@ setup(
 
     keywords='catalog commandline indexer offline',
     packages=find_packages(exclude=['tests*']),
-    install_requires=['docopt', 'anytree'],
+    install_requires=['docopt', 'anytree', 'python-rar'],
 
     extras_require={
         'dev': ['check-manifest'],

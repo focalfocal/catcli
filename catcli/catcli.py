@@ -6,6 +6,9 @@ author: deadc0de6 (https://github.com/deadc0de6)
 Copyright (c) 2017, deadc0de6
 
 Catcli command line interface
+----------------------------------------------------------------------------------------
+author for modifications to add rar support: focalfocal (https://github.com/focalfocal)
+Copyright (c) 2020, focalfocal for the modifications
 """
 
 import sys
@@ -21,6 +24,8 @@ from .walker import Walker
 from .noder import Noder
 from .utils import ask, edit
 
+from unrar import __version__ as UNRAR_VERSION
+
 NAME = 'catcli'
 CUR = os.path.dirname(os.path.abspath(__file__))
 CATALOGPATH = '{}.catalog'.format(NAME)
@@ -30,7 +35,7 @@ WILD = '*'
 
 BANNER = """ +-+-+-+-+-+-+
  |c|a|t|c|l|i|
- +-+-+-+-+-+-+ v{}""".format(VERSION)
+ +-+-+-+-+-+-+ v{} + unrar v{}""".format(VERSION, UNRAR_VERSION)
 
 USAGE = """
 {0}
@@ -222,7 +227,8 @@ def banner():
 
 
 def main():
-    args = docopt(USAGE, version=VERSION)
+    #args = docopt(USAGE, version=VERSION)
+    args = docopt(USAGE, version="catcli " + VERSION + " + unrar " + UNRAR_VERSION )
 
     if args['help']:
         print(USAGE)
