@@ -3,5 +3,5 @@
 dist/
 build/
 *.egg-info/
-/tmp #tests
-.catalog
+tmp/ #tests
+*.catalog
