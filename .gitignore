@@ -3,5 +3,6 @@
 dist/
 build/
 *.egg-info/
-tmp/ #tests
+#tests, etc:
+tmp/ 
 *.catalog
